@@ -1,6 +1,6 @@
-* {
+/* * {
     background-image: linear-gradient(to right, yellow, green );
-}
+} */
 main {
     display: grid;
     grid-template-columns: 400px 1fr;
@@ -36,3 +36,7 @@ h1 {
     height: 50px;
 }
 
+
+.chartContainer {
+    margin: auto;
+}
