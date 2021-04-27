@@ -86,6 +86,7 @@ function renderResults(){
     const liElement = document.createElement('li');
     resultSection.appendChild(liElement);
     liElement.textContent = Images.all[i].name + ' : ' + Images.all[i].click + ' Votes' + '/'+' was seen'+' :'+ Images.all[i].shown;
+    saving();
   }
 
 }
@@ -116,18 +117,33 @@ function eventClick (c) {
 
     clickTimes++;
     renderImages();
-
+    
 
   }
 
 }
 
+function saving (){
+  localStorage.setItem('info',JSON.stringify(Images.all));
+}
+
 function resultView (v){
+  resultSection.removeEventListener('click',resultView);
   if( v.target.id == 'viewButton'){
     renderResults();
     renderChart();
   }
+  
+}
 
+function getInfo (){
+  let data = JSON.parse(localStorage.getItem('info'));
+  if(data){
+    for (let i = 0; i < data.length; i++) {
+      new Images (data[i].click, data[i].shown);
+
+    }
+  }
 }
 
 function renderChart(){
@@ -177,3 +193,5 @@ function renderChart(){
 photosSection.addEventListener('click',eventClick);
 resultSection.addEventListener('click',resultView);
 
+getInfo();
+console.log(getInfo);
